@@ -35,16 +35,19 @@ flowchart TD
     D[nai score]
     E[nai dashboard]
   end
+
   subgraph Runtime
-    F[Execution Engine]\n(concurrency + tracing)
-    G[Config Loader]\n(pipeline.yaml)
+    F[Execution Engine]
+    G[Config Loader]
   end
+
   subgraph Modules
     H[Embedder]
     I[Retriever]
     J[Agent / LLM]
     K[Evaluator]
   end
+
   A --> G
   B --> H
   C --> F
@@ -116,7 +119,7 @@ These DX goals drive our roadmap and acceptance tests.
 ## 🗺️ Roadmap Snapshot
 
 - **Module Marketplace**—discover & install third‑party retrievers and evaluators.
-- **`nai test`**\*\* GitHub Action\*\*—CI template that runs `nai score` gates.
+- **`nai test`** - **GitHub Action**—CI template that runs `nai score` gates.
 - **Evaluation Dashboard v2**—historical run comparison and trend charts.
 - **Multi‑agent workflow support** (MCP++ prototype).
 
