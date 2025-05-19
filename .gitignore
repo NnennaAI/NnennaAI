@@ -1,0 +1,4 @@
+cli/commands/__pycache__/*
+cli/context/__pycache__/*
+.qodo
+dist/
