@@ -1,7 +1,5 @@
 # 🧠 NnennaAI Manifesto
 
----
-
 ## ✨ Why This Exists
 
 Generative AI is too powerful—and too chaotic—to be left to hype and guesswork.
@@ -13,8 +11,6 @@ We’re building the **developer-first GenAI framework** for orchestrating pipel
 
 This isn’t just another tool.
 It’s a shared foundation for those who believe GenAI infrastructure should be **composable, inspectable, and trustworthy** from day one.
-
----
 
 ## 🧠 What We Believe
 
@@ -32,8 +28,6 @@ And this is what we believe:
 - 🚀 **Start fast, iterate faster.** Developer experience should feel fast, safe, and empowering at every stage of the GenAI lifecycle.
 
 - 🤝 **AI should extend human agency, not replace it.** Our tools help people build with AI—not surrender control to it.
-
----
 
 ## 🧭 Core Principles
 
@@ -85,8 +79,6 @@ Our orchestration tools log, trace, and step through agent decisions—so you un
 
 💡 _Example: Agents ship with observable context protocol (MCP) and deterministic fallback modes._
 
----
-
 ## 🌐 Community Commitments
 
 We’re building this framework in public—with everyone from tinkerers to teams in mind.
@@ -96,8 +88,6 @@ We’re building this framework in public—with everyone from tinkerers to team
 - 🛟 **Developer Empathy:** We invest in docs, examples, and onboarding flows—because friction kills adoption.
 
 - 💬 **Conversation, Not Commands:** We welcome dissent, feedback, and vision. If you disagree with something in here—we want to hear why.
-
----
 
 ## 🔭 What Comes Next
 
@@ -112,8 +102,6 @@ We're not done. We're just getting started.
 - Multi-agent protocol experimentation (MCP++)
 
 You can follow along in our [GitHub Project Board](https://github.com/NnennaAI/NnennaAI/projects).
-
----
 
 ## 🧪 Contribute to the Future
 
@@ -130,9 +118,7 @@ If this resonates:
 
 - [README.md](./README.md) – Project overview
 - [CONTRIBUTING.md](./CONTRIBUTING.md) – How to contribute
-- [decisions/](./decisions/) – Architecture and tradeoff records
-
----
+- [decisions](./decisions/) – Architecture and tradeoff records
 
 ## 🧬 Final Word
 
@@ -141,6 +127,6 @@ We review and revise it regularly—just like code.
 
 If you're building GenAI infrastructure that puts developers first, we’re building it with you.
 
-**Welcome to NnennaAI. Let’s orchestrate the future.**
+**Welcome to NnennaAI. Let’s orchestrate the future of GenAI Development.**
 
-— _Team NnennaAI_
+— **The _NnennaAI_ project**
