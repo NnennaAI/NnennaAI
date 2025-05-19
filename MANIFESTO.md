@@ -1,64 +1,146 @@
-# Manifesto: AI Infrastructure with Intention
+# 🧠 NnennaAI Manifesto
 
-We’re building more than just code.  
-We’re building **infrastructure that reflects what we believe AI should be.**
+---
 
-This framework exists because today’s GenAI landscape is fragmented, hype-driven, and often opaque. Developers are handed tools but not understanding. Codebases optimize for speed, not wisdom. And the systems we build reflect that rush.
+## ✨ Why This Exists
 
-It doesn’t have to be that way.
+Generative AI is too powerful—and too chaotic—to be left to hype and guesswork.
+The existing landscape is fragmented, unintuitive, and often optimized for demos, not developers.
 
+**NnennaAI exists to fix that.**
 
-## What We Believe
+We’re building the **developer-first GenAI framework** for orchestrating pipelines, agents, and evaluations—designed with minimal lift and maximal clarity.
 
-**1. Infrastructure is not neutral.**  
-Every layer — from the embedding model to the retrieval logic to the evaluation metric — encodes values, biases, and assumptions. We choose to make those visible, composable, and adjustable.
+This isn’t just another tool.
+It’s a shared foundation for those who believe GenAI infrastructure should be **composable, inspectable, and trustworthy** from day one.
 
-**2. Velocity without reflection is a trap.**  
-We believe in moving fast *with intention*. That means not just building GenAI systems quickly, but understanding **why** we’re building them — and how to do it responsibly.
+---
 
-**3. Evaluation is a prerequisite, not a postmortem.**  
-You can’t optimize what you don’t measure. This framework bakes in quality, performance, and safety evaluation from the beginning — not as an afterthought.
+## 🧠 What We Believe
 
-**4. Security is a foundation, not a feature.**  
-LLMs interact with sensitive data, business-critical systems, and end users. Guardrails should come standard. We prioritize patterns that protect both developers and users.
+We are engineers, researchers, builders, and explorers.
+And this is what we believe:
 
-**5. Modularity is power.**  
-We offer composable modules so you can adapt each part of your GenAI system — without reengineering the whole thing. This is for builders who want clarity and control, not lock-in.
+- 🧩 **Modularity unlocks power.** GenAI workflows should be composable, swappable, and transparent—not monolithic black boxes.
 
-**6. Productivity is about leverage, not just output.**  
-This is *productivity infrastructure* for GenAI builders. We care about results that are:
-- Measurable
-- Cost-effective
-- Trustworthy
-- Aligned with real business value
+- 🔍 **You can’t own your AI if you don’t own your evaluations.** Reproducible metrics and feedback loops should come first, not last.
 
-Whether you're building for onboarding, internal tooling, or enterprise intelligence — this framework is here to help you **optimize, not just ship.**
+- 🛠️ **CLI-first is developer-first.** Local-first tooling gives engineers superpowers. You shouldn’t need a dashboard to prototype intelligence.
 
-**7. We build for understanding.**  
-Every template, pattern, and component is designed to **teach as you build**. Because the fastest path to mastery is transparency — not abstraction.
+- 🧠 **Simplicity is strength.** We simplify the orchestration layer so developers can focus on logic, not glue code.
 
+- 🚀 **Start fast, iterate faster.** Developer experience should feel fast, safe, and empowering at every stage of the GenAI lifecycle.
 
-## Why This Framework Exists
+- 🤝 **AI should extend human agency, not replace it.** Our tools help people build with AI—not surrender control to it.
 
-We needed a way to build GenAI systems that are:
-- **Evaluated** for quality
-- **Composable** for scale
-- **Observable** for trust
-- **Secure** by default
-- **Understandable** by anyone
+---
 
-So we made one.
+## 🧭 Core Principles
 
+### 1. 🔓 Default to Open
 
-## What Comes Next
+> _Open-source is a principle, not a distribution model._
 
-This isn’t just a toolkit. It’s an evolving architecture for:
-- Learning
-- Building
-- Reflecting
-- Improving
+We believe AI infrastructure must be inspectable, forkable, and community-owned. Every module, decision, and CLI command invites contribution and clarity.
 
-We welcome contributors, skeptics, educators, and engineers.  
-Let’s build a better GenAI ecosystem — one that moves fast *and* moves wisely.
+💡 _Example: All modules live in versioned directories with editable configs and test coverage._
 
-**– The Nnenn.ai Project**
+---
+
+### 2. 🧩 Modular, Not Monolithic
+
+> _Flexibility is power._
+
+Each component in NnennaAI works alone or together. You can build a full pipeline—or just swap in the embedder, retriever, or evaluator.
+
+💡 _Example: You can drop in ChromaDB or use your own vector store via config._
+
+---
+
+### 3. 🧪 Evaluation is Infrastructure
+
+> _Build measurement into the system, not on top of it._
+
+Every pipeline supports built-in quality, latency, and cost metrics—because evaluation is a foundational layer, not an afterthought.
+
+💡 _Example: Run `nai eval` to compare prompt strategies across runs using RAGAS metrics._
+
+---
+
+### 4. 🧠 Simple > Clever
+
+> _Intelligence isn’t complexity. It’s clarity._
+
+We write readable code with sane defaults and smart flags—so engineers can grok what’s happening without scrolling through docs.
+
+💡 _Example: `nai run` supports `--dry-run` to preview execution plans._
+
+---
+
+### 5. 🤖 AI Agents Are Systems, Not Magic
+
+> _You should be able to see every decision an agent makes._
+
+Our orchestration tools log, trace, and step through agent decisions—so you understand behavior before scaling risk.
+
+💡 _Example: Agents ship with observable context protocol (MCP) and deterministic fallback modes._
+
+---
+
+## 🌐 Community Commitments
+
+We’re building this framework in public—with everyone from tinkerers to teams in mind.
+
+- 🤝 **Transparent Roadmaps:** Major features are decided collaboratively and published in `decisions/`.
+
+- 🛟 **Developer Empathy:** We invest in docs, examples, and onboarding flows—because friction kills adoption.
+
+- 💬 **Conversation, Not Commands:** We welcome dissent, feedback, and vision. If you disagree with something in here—we want to hear why.
+
+---
+
+## 🔭 What Comes Next
+
+We're not done. We're just getting started.
+
+### On our near-term horizon:
+
+- `modules/` expansion: more plug-and-play evals, retrievers, and agents
+- `templates/`: opinionated scaffolds for common GenAI use cases
+- `nai test`: a native test harness for GenAI flows
+- Evaluation dashboards + run history inspection
+- Multi-agent protocol experimentation (MCP++)
+
+You can follow along in our [GitHub Project Board](https://github.com/NnennaAI/NnennaAI/projects).
+
+---
+
+## 🧪 Contribute to the Future
+
+We believe the best GenAI infrastructure will be built in the open—by the builders using it.
+
+If this resonates:
+
+- 📥 Fork the repo
+- 🧪 Try out a module
+- ✍🏾 Suggest an improvement
+- 📢 Share your use case
+
+### 🔗 Useful Links
+
+- [README.md](./README.md) – Project overview
+- [CONTRIBUTING.md](./CONTRIBUTING.md) – How to contribute
+- [decisions/](./decisions/) – Architecture and tradeoff records
+
+---
+
+## 🧬 Final Word
+
+This manifesto is a **living document**.
+We review and revise it regularly—just like code.
+
+If you're building GenAI infrastructure that puts developers first, we’re building it with you.
+
+**Welcome to NnennaAI. Let’s orchestrate the future.**
+
+— _Team NnennaAI_
