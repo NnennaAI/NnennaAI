@@ -87,6 +87,8 @@ git clone https://github.com/nnennaai/nnennaai
 
 Start with a pull request, join the discussion, or suggest a template!
 
+And check out 👉 [CONTRIBUTING.md](./CONTRIBUTING.md) to learn more.
+
 ## 🛣️ Roadmap
  - [ ] 🧪 Modular evaluation pipelines
 
