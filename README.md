@@ -71,6 +71,7 @@ nnennaai/
 ├── templates/       # Plug-and-play RAG, agent, summarizer workflows
 ├── notebooks/       # Google Colab onboarding labs
 ├── cli/             # Scaffold & validate pipelines
+├── decisions/
 ├── docs/
 ├── README.md
 └── MANIFESTO.md
