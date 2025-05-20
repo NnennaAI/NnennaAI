@@ -77,6 +77,16 @@ nnennaai/
 └── MANIFESTO.md
 ```
 
+## 📚 Docs
+
+- [Quickstart Guide](docs/quickstart.md)
+- [GenAI Pipeline Architecture](docs/pipeline.md)
+- [Module System](docs/modules.md)
+- [Evaluation Guide](docs/evaluations.md)
+- [Configuration Reference](docs/config.md)
+
+CLI Usage
+
 ## 🤝 Contributing
 
 We’re building this in public and welcoming thoughtful contributors.
