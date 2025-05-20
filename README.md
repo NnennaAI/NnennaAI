@@ -50,7 +50,7 @@ NnennaAI exists to change that by offering:
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-repo/nnennaai
+git clone git@github.com:NnennaAI/NnennaAI.git
 cd nnennaai
 
 # Set up environment
