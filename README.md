@@ -93,7 +93,7 @@ We’re building this in public and welcoming thoughtful contributors.
 If you care about clarity, safety, and responsible GenAI, you belong here. 💬✨
 
 ```bash
-git clone https://github.com/nnennaai/nnennaai
+git clone git@github.com:NnennaAI/NnennaAI.git
 ```
 
 Start with a pull request, join the discussion, or suggest a template!
