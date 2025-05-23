@@ -7,7 +7,13 @@ from rich.panel import Panel
 from pathlib import Path
 import sys
 
-from cli.commands import init, ingest, run, score, config, dashboard
+# Import commands
+from cli.commands.init import init_command
+from cli.commands.ingest import ingest_command
+from cli.commands.run import run_command
+from cli.commands.score import score_command
+from cli.commands.config import config_command
+from cli.commands.dashboard import dashboard_command
 from cli.utils import setup_logging, print_version
 
 # Initialize Typer app with custom help
@@ -23,12 +29,12 @@ app = typer.Typer(
 console = Console()
 
 # Register subcommands
-app.command("init")(init.init_command)
-app.command("ingest")(ingest.ingest_command)
-app.command("run")(run.run_command)
-app.command("score")(score.score_command)
-app.command("config")(config.config_command)
-app.command("dashboard")(dashboard.dashboard_command)
+app.command("init")(init_command)
+app.command("ingest")(ingest_command)
+app.command("run")(run_command)
+app.command("score")(score_command)
+app.command("config")(config_command)
+app.command("dashboard")(dashboard_command)
 
 
 @app.command("version")
