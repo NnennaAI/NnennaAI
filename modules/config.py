@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Literal, Optional, Dict, Any
 import os
 from dotenv import load_dotenv
-
+# TODO: Add import for Langfuse & refactor to be Pythonic if needed
 # Load environment variables
 load_dotenv()
 
@@ -52,6 +52,7 @@ class PipelineSettings(BaseModel):
     trace: bool = False
     save_runs: bool = True
     run_dir: Path = Path(".nai/runs")
+    langfuse_enabled: bool = True  # Enable Langfuse cost tracking by default
 
 
 class Settings(BaseModel):

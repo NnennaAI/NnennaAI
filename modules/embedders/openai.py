@@ -9,7 +9,7 @@ import logging
 from modules.base import EmbedderModule
 
 logger = logging.getLogger(__name__)
-
+# TODO: Add import for Langfuse & refactor to be Pythonic
 
 class OpenAIEmbedder(EmbedderModule):
     """

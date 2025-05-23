@@ -9,7 +9,7 @@ from pathlib import Path
 import uuid
 
 from modules.base import RetrieverModule
-
+# TODO: Add import for Langfuse & refactor to be Pythonic
 logger = logging.getLogger(__name__)
 
 

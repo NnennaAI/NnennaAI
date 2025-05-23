@@ -6,6 +6,12 @@ import openai
 from tenacity import retry, stop_after_attempt, wait_exponential
 import logging
 import json
+# TODO: Refactor to be Pythonic if needed
+try:
+    from langfuse import Langfuse
+    LANGFUSE_AVAILABLE = True
+except ImportError:
+    LANGFUSE_AVAILABLE = False
 
 from modules.base import GeneratorModule
 
@@ -50,6 +56,18 @@ Answer:"""
         self.max_tokens = self.config.get("max_tokens", 1000)
         self.system_prompt = self.config.get("system_prompt", "You are a helpful AI assistant.")
         
+        # Initialize Langfuse if available and enabled
+        self.langfuse = None
+        self.langfuse_enabled = self.config.get("langfuse_enabled", True) and LANGFUSE_AVAILABLE
+        
+        if self.langfuse_enabled:
+            try:
+                self.langfuse = Langfuse()
+                logger.info(f"Langfuse enabled for {self.model} generator")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Langfuse: {e}")
+                self.langfuse_enabled = False
+        
         logger.info(f"Initialized OpenAI generator with model: {self.model}")
     
     @retry(
@@ -67,6 +85,9 @@ Answer:"""
             n=1
         )
         
+        # Store response for Langfuse usage tracking
+        self._last_response = response
+        
         # Track token usage
         if response.usage:
             self._metrics["prompt_tokens"] = self._metrics.get("prompt_tokens", 0) + response.usage.prompt_tokens
@@ -82,6 +103,7 @@ Answer:"""
             prompt: Input prompt or query
             context: Optional context for RAG (list of retrieved docs)
             use_rag_template: Whether to use RAG-specific formatting
+            run_id: Optional run ID for tracking
             **kwargs: Additional generation parameters
             
         Returns:
@@ -92,6 +114,9 @@ Answer:"""
         
         @self._track_metrics
         def _generate_response():
+            # Extract run_id if provided
+            run_id = kwargs.pop("run_id", None)
+            
             # Handle RAG-specific formatting
             if kwargs.get("use_rag_template", False) and "context" in kwargs:
                 # Format context from retrieved documents
@@ -120,11 +145,63 @@ Answer:"""
                     {"role": "user", "content": prompt}
                 ]
             
-            # Generate response
-            response = self._generate(messages, **kwargs)
+            # Start Langfuse generation tracking if enabled
+            langfuse_generation = None
+            if self.langfuse_enabled and self.langfuse:
+                try:
+                    langfuse_generation = self.langfuse.generation(
+                        name="openai_generation",
+                        model=self.model,
+                        input=messages,
+                        metadata={
+                            "temperature": kwargs.get("temperature", self.temperature),
+                            "max_tokens": kwargs.get("max_tokens", self.max_tokens),
+                            "run_id": run_id,
+                            "use_rag_template": kwargs.get("use_rag_template", False)
+                        }
+                    )
+                except Exception as e:
+                    logger.warning(f"Failed to start Langfuse generation: {e}")
             
-            logger.debug(f"Generated response of length: {len(response)}")
-            return response
+            # Generate response
+            try:
+                response = self._generate(messages, **kwargs)
+                
+                # Update Langfuse with response and usage
+                if langfuse_generation and hasattr(self, '_last_response'):
+                    try:
+                        usage_data = None
+                        if self._last_response.usage:
+                            usage_data = {
+                                "input": self._last_response.usage.prompt_tokens,
+                                "output": self._last_response.usage.completion_tokens,
+                                "total": self._last_response.usage.total_tokens,
+                                "unit": "TOKENS"
+                            }
+                        
+                        langfuse_generation.end(
+                            output=response,
+                            usage=usage_data,
+                            level="DEFAULT",
+                            status_message="Success"
+                        )
+                    except Exception as e:
+                        logger.warning(f"Failed to update Langfuse generation: {e}")
+                
+                logger.debug(f"Generated response of length: {len(response)}")
+                return response
+                
+            except Exception as e:
+                # Log error to Langfuse
+                if langfuse_generation:
+                    try:
+                        langfuse_generation.end(
+                            level="ERROR",
+                            status_message=str(e)
+                        )
+                    except:
+                        pass
+                raise
         
         return _generate_response()
     
@@ -148,9 +225,18 @@ Answer:"""
     
     def get_stats(self) -> Dict[str, Any]:
         """Get generation statistics."""
-        return {
+        stats = {
             "model": self.model,
             "total_tokens": self._metrics.get("prompt_tokens", 0) + self._metrics.get("completion_tokens", 0),
+            "prompt_tokens": self._metrics.get("prompt_tokens", 0),
+            "completion_tokens": self._metrics.get("completion_tokens", 0),
             "estimated_cost": f"${self.estimated_cost:.4f}",
+            "langfuse_enabled": self.langfuse_enabled,
             **self.metrics
         }
+        
+        # If Langfuse is enabled, note that precise costs are in Langfuse dashboard
+        if self.langfuse_enabled:
+            stats["cost_tracking"] = "Precise costs available in Langfuse dashboard"
+        
+        return stats
