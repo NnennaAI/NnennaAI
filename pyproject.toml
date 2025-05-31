@@ -1,0 +1,172 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nnennaai"
+version = "0.1.0"
+description = "The developer-first GenAI framework for building evaluated, modular RAG pipelines"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Nnenna Ndukwe", email = "nnennahacks@gmail.com"},
+]
+maintainers = [
+    {name = "Nnenna Ndukwe", email = "nnennahacks@gmail.com"},
+]
+keywords = [
+    "genai",
+    "llm",
+    "rag",
+    "evaluation",
+    "langchain",
+    "ai",
+    "machine-learning",
+    "nlp",
+    "developer-tools",
+    "cli"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+
+# Core dependencies
+dependencies = [
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "openai>=1.0.0",
+    "chromadb>=0.4.0",
+    "tenacity>=8.0.0",
+    "python-dotenv>=1.0.0",
+    "datasets>=2.0.0",  # For RAGAS
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+# Optional dependencies for different features
+ragas = [
+    "ragas>=0.1.0",
+]
+
+langfuse = [
+    "langfuse>=2.0.0",
+]
+
+# All observability tools
+observability = [
+    "langfuse>=2.0.0",
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.20.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+    "pre-commit>=3.0.0",
+]
+
+# Documentation dependencies
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+]
+
+# All optional dependencies
+all = [
+    "nnennaai[ragas,langfuse,observability,dev,docs]",
+]
+
+[project.urls]
+Homepage = "https://github.com/NnennaAI/NnennaAI"
+Documentation = "https://github.com/NnennaAI/NnennaAI/docs"
+Repository = "https://github.com/NnennaAI/NnennaAI"
+Issues = "https://github.com/NnennaAI/NnennaAI/issues"
+Discussions = "https://github.com/NnennaAI/NnennaAI/discussions"
+
+[project.scripts]
+# This creates the 'nai' command
+nai = "cli.main:app"
+
+[tool.setuptools]
+packages = ["modules", "cli", "cli.commands"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.md", "*.txt"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+
+[tool.mypy]
+python_version = "3.8"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[tool.ruff]
+line-length = 100
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --cov=modules --cov=cli --cov-report=html --cov-report=term"
+
+[tool.coverage.run]
+source = ["modules", "cli"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

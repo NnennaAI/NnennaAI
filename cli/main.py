@@ -7,14 +7,26 @@ from rich.panel import Panel
 from pathlib import Path
 import sys
 
-# Import commands
-from cli.commands.init import init_command
-from cli.commands.ingest import ingest_command
-from cli.commands.run import run_command
-from cli.commands.score import score_command
-from cli.commands.config import config_command
-from cli.commands.dashboard import dashboard_command
-from cli.utils import setup_logging, print_version
+# Handle imports for both package and development modes
+try:
+    # Package mode
+    from cli.commands.init import init_command
+    from cli.commands.ingest import ingest_command
+    from cli.commands.run import run_command
+    from cli.commands.score import score_command
+    from cli.commands.config import config_command
+    from cli.commands.dashboard import dashboard_command
+    from cli.utils import setup_logging, print_version
+except ImportError:
+    # Development mode
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from cli.commands.init import init_command
+    from cli.commands.ingest import ingest_command
+    from cli.commands.run import run_command
+    from cli.commands.score import score_command
+    from cli.commands.config import config_command
+    from cli.commands.dashboard import dashboard_command
+    from cli.utils import setup_logging, print_version
 
 # Initialize Typer app with custom help
 app = typer.Typer(
